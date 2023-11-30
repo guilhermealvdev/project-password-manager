@@ -11,6 +11,15 @@ function Form() {
     setFormVisibility(!formVisibility);
   };
 
+  /* Req 8 abaixo */
+  const [checkboxMark, setCheckboxMark] = useState(false);
+  const [pwAlv, setPwAlv] = useState(true);
+
+  const toggleCheckbox = () => {
+    setCheckboxMark(!checkboxMark);
+    setPwAlv(!pwAlv);
+  };
+
   /* Req 4 abaixo - Teste (Revisar!) */
 
   const [serviceName, setServiceName] = useState('');
@@ -33,6 +42,12 @@ function Form() {
 
   const valid = 'valid-password-check';
   const invalid = 'invalid-password-check';
+
+  /* Req 6 */
+
+  const cadastrar = () => {
+    console.log(serviceName);
+  };
 
   return (
     <div>
@@ -62,9 +77,11 @@ function Form() {
             } }
           />
 
+          { /* Editado type abaixo para Requisito 8 */ }
+
           <label htmlFor="pw">Senha</label>
           <input
-            type="password"
+            type={ pwAlv ? 'password' : 'text' }
             id="pw"
             value={ password }
             onChange={ (e) => {
@@ -81,7 +98,14 @@ function Form() {
             onChange={ (e) => setUrl(e.target.value) }
           />
 
-          <button type="submit" disabled={ !isButtonEnabled }>Cadastrar</button>
+          <button
+            type="submit"
+            disabled={ !isButtonEnabled }
+            onClick={ cadastrar }
+          >
+            Cadastrar
+          </button>
+
           <button onClick={ toggleCancel }>Cancelar</button>
 
           { /* Req 5 Abaixo */ }
@@ -118,6 +142,11 @@ function Form() {
           >
             Possuir algum caractere especial
           </p>
+
+          { /* Req 8 */ }
+
+          <label htmlFor="cb">Esconder senhas</label>
+          <input type="checkbox" id="cb" onChange={ toggleCheckbox } />
 
         </form>
       )}
