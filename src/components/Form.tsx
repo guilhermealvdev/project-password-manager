@@ -1,24 +1,39 @@
+import { useState } from 'react';
+
 function Form() {
+  const [formVisibility, setFormVisibility] = useState(false);
+
+  const toggleForm = () => {
+    setFormVisibility(!formVisibility);
+  };
+
+  const toggleCancel = () => {
+    setFormVisibility(!formVisibility);
+  };
+
   return (
     <div>
-      { /* Req 3 aqui? */ }
+      {!formVisibility ? (
+        <button onClick={ toggleForm }>Cadastrar nova senha</button>
+      ) : (
+        <form action="">
+          <label htmlFor="service-name">Nome do Serviço</label>
+          <input type="text" id="service-name" />
 
-      <form action="">
-        <label htmlFor="service-name">Nome do Serviço</label>
-        <input type="text" id="service-name" />
+          <label htmlFor="login">Login</label>
+          <input type="text" id="login" />
 
-        <label htmlFor="login">Login</label>
-        <input type="text" id="login" />
+          <label htmlFor="pw">Senha</label>
+          <input type="password" id="pw" />
 
-        <label htmlFor="pw">Senha</label>
-        <input type="password" id="pw" />
+          <label htmlFor="url">URL</label>
+          <input type="text" id="url" />
 
-        <label htmlFor="url">URL</label>
-        <input type="text" id="url" />
-
-        <button>Cadastrar</button>
-        <button>Cancelar</button>
-      </form>
+          <button>Cadastrar</button>
+          <button onClick={ toggleCancel }>Cancelar</button>
+        </form>
+      )}
+      ;
     </div>
   );
 }
