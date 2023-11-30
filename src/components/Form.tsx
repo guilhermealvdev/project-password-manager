@@ -45,8 +45,16 @@ function Form() {
 
   /* Req 6 */
 
+  const [listaServicos, setListaServicos] = useState([]);
+
   const cadastrar = () => {
-    console.log(serviceName);
+    const servico = {
+      serviceName,
+      login,
+      password,
+      url,
+    };
+    console.log(servico);
   };
 
   return (
@@ -81,7 +89,7 @@ function Form() {
 
           <label htmlFor="pw">Senha</label>
           <input
-            type={ pwAlv ? 'password' : 'text' }
+            type={ !pwAlv ? 'text' : 'password' }
             id="pw"
             value={ password }
             onChange={ (e) => {
@@ -99,7 +107,7 @@ function Form() {
           />
 
           <button
-            type="submit"
+            type="button"
             disabled={ !isButtonEnabled }
             onClick={ cadastrar }
           >
@@ -150,7 +158,6 @@ function Form() {
 
         </form>
       )}
-      ;
     </div>
   );
 }
