@@ -7,11 +7,7 @@ function Form() {
     setFormVisibility(!formVisibility);
   };
 
-  const toggleCancel = () => {
-    setFormVisibility(!formVisibility);
-  };
-
-  /* Req 8 abaixo */
+  /* Req 8 abaixo - Refazer */
   const [checkboxMark, setCheckboxMark] = useState(false);
   const [pwAlv, setPwAlv] = useState(true);
 
@@ -45,16 +41,45 @@ function Form() {
 
   /* Req 6 */
 
-  const [listaServicos, setListaServicos] = useState([]);
+  interface Servico {
+    serviceName: string;
+    login: string;
+    password: string;
+    url: string;
+  }
+
+  const [listaServicos, setListaServicos] = useState<Servico[]>([]);
 
   const cadastrar = () => {
-    const servico = {
+    const servico: Servico = {
       serviceName,
       login,
       password,
       url,
     };
     console.log(servico);
+    setListaServicos([...listaServicos, servico]);
+    console.log(listaServicos);
+
+    // const servicosAsString = listaServicos.map(({ serviceName: service,
+    //   login: userLogin, password: userPassword, url: serviceUrl }) => {
+    //   return (
+    //     <div key={service}>
+    //       <ul>
+    //         <li><a href={ serviceUrl }></a> {service} </li>
+    //         <li>{ userLogin }</li>
+    //         <li>{ userPassword }</li>
+    //       </ul>
+    //     </div>
+    //   );
+
+    // setFraseCadastro(servicosAsString);
+
+    setServiceName('');
+    setLogin('');
+    setPassword('');
+    setUrl('');
+    toggleForm();
   };
 
   return (
@@ -114,7 +139,7 @@ function Form() {
             Cadastrar
           </button>
 
-          <button onClick={ toggleCancel }>Cancelar</button>
+          <button onClick={ toggleForm }>Cancelar</button>
 
           { /* Req 5 Abaixo */ }
           { /* Verificação da Senha */ }
@@ -158,6 +183,24 @@ function Form() {
 
         </form>
       )}
+      { listaServicos.length === 0 && (
+        <p>nenhuma senha cadastrada</p>
+      ) }
+      {
+        listaServicos.map(({ serviceName: service,
+          login: userLogin, password: userPassword, url: serviceUrl }) => {
+          return (
+            <div key={ service }>
+              <ul>
+                <li><a href={ serviceUrl }>{ service }</a></li>
+                <li>{ userLogin }</li>
+                <li>{ userPassword }</li>
+              </ul>
+              <button>qwe</button>
+            </div>
+          );
+        })
+      }
     </div>
   );
 }
