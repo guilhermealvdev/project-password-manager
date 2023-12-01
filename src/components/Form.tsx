@@ -9,11 +9,11 @@ function Form() {
 
   /* Req 8 abaixo - Refazer */
   const [checkboxMark, setCheckboxMark] = useState(false);
-  const [pwAlv, setPwAlv] = useState(true);
+  const [hidePw, setHidePw] = useState(false);
 
   const toggleCheckbox = () => {
     setCheckboxMark(!checkboxMark);
-    setPwAlv(!pwAlv);
+    setHidePw(!hidePw);
   };
 
   /* Req 4 abaixo - Teste (Revisar!) */
@@ -121,7 +121,7 @@ function Form() {
 
           <label htmlFor="pw">Senha</label>
           <input
-            type={ !pwAlv ? 'text' : 'password' }
+            type="password"
             id="pw"
             value={ password }
             onChange={ (e) => {
@@ -201,7 +201,12 @@ function Form() {
               <ul>
                 <li><a href={ serviceUrl }>{ service }</a></li>
                 <li>{ userLogin }</li>
-                <li>{ userPassword }</li>
+                <li>
+                  { hidePw
+                  === true
+                    ? '******'
+                    : userPassword }
+                </li>
               </ul>
               <button data-testid="remove-btn" onClick={ () => removerItem(service) }>
                 Remover Item
