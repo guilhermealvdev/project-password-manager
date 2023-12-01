@@ -84,13 +84,17 @@ function Form() {
 
   /* Req 7 */
   /* Aplicar "class" no button, usar filter com a key */
-  const removerItem = (service:string) => {
+  const removerItem = (service: string) => {
     const novaLista = listaServicos.filter((item) => item.serviceName !== service);
     setListaServicos(novaLista);
   };
 
   return (
     <div>
+
+      <label htmlFor="cb">Esconder senhas</label>
+      <input type="checkbox" id="cb" onChange={ toggleCheckbox } />
+
       {!formVisibility ? (
         <button onClick={ toggleForm }>Cadastrar nova senha</button>
       ) : (
@@ -117,7 +121,7 @@ function Form() {
             } }
           />
 
-          { /* Editado type abaixo para Requisito 8 */ }
+          { /* Editado type abaixo para Requisito 8 */}
 
           <label htmlFor="pw">Senha</label>
           <input
@@ -148,8 +152,8 @@ function Form() {
 
           <button onClick={ toggleForm }>Cancelar</button>
 
-          { /* Req 5 Abaixo */ }
-          { /* Verificação da Senha */ }
+          { /* Req 5 Abaixo */}
+          { /* Verificação da Senha */}
 
           <p
             className={ password.length < 8 ? invalid
@@ -183,29 +187,26 @@ function Form() {
             Possuir algum caractere especial
           </p>
 
-          { /* Req 8 */ }
-
-          <label htmlFor="cb">Esconder senhas</label>
-          <input type="checkbox" id="cb" onChange={ toggleCheckbox } />
+          { /* Req 8 */}
 
         </form>
       )}
-      { listaServicos.length === 0 && (
+      {listaServicos.length === 0 && (
         <p>nenhuma senha cadastrada</p>
-      ) }
+      )}
       {
         listaServicos.map(({ serviceName: service,
           login: userLogin, password: userPassword, url: serviceUrl }) => {
           return (
             <div key={ service }>
               <ul>
-                <li><a href={ serviceUrl }>{ service }</a></li>
-                <li>{ userLogin }</li>
+                <li><a href={ serviceUrl }>{service}</a></li>
+                <li>{userLogin}</li>
                 <li>
-                  { hidePw
-                  === true
+                  {hidePw
+                    === true
                     ? '******'
-                    : userPassword }
+                    : userPassword}
                 </li>
               </ul>
               <button data-testid="remove-btn" onClick={ () => removerItem(service) }>
