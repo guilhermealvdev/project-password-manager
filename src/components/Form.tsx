@@ -82,6 +82,13 @@ function Form() {
     toggleForm();
   };
 
+  /* Req 7 */
+  /* Aplicar "class" no button, usar filter com a key */
+  const removerItem = (service:string) => {
+    const novaLista = listaServicos.filter((item) => item.serviceName !== service);
+    setListaServicos(novaLista);
+  };
+
   return (
     <div>
       {!formVisibility ? (
@@ -196,7 +203,9 @@ function Form() {
                 <li>{ userLogin }</li>
                 <li>{ userPassword }</li>
               </ul>
-              <button>qwe</button>
+              <button data-testid="remove-btn" onClick={ () => removerItem(service) }>
+                Remover Item
+              </button>
             </div>
           );
         })
